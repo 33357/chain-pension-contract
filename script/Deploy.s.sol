@@ -16,7 +16,7 @@ contract CounterScript is Script {
 
     function writeToFile(address contractAddress) internal {
         string memory path = "./sdk/src/config/deployment.json";
-        string memory content = string(abi.encodePacked('{"proxyAddress":"',vm.toString(contractAddress),'","implAddress":"',vm.toString(contractAddress),'","operator":"',vm.toString(tx.origin),'","fromBlock":',vm.toString(block.number),'}'));
+        string memory content = string(abi.encodePacked('{"',vm.toString(block.chainid),'":{"Persion":{"proxyAddress":"',vm.toString(contractAddress),'","implAddress":"',vm.toString(contractAddress),'","operator":"',vm.toString(tx.origin),'","fromBlock":',vm.toString(block.number),'}}}'));
         vm.writeFile(path, content);
     }
 }
