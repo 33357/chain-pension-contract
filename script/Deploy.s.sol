@@ -8,7 +8,8 @@ contract CounterScript is Script {
     function setUp() public {}
 
     function run() external {
-        vm.startBroadcast();
+        uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        vm.startBroadcast(deployerPrivateKey);
         Persion p = new Persion();
         vm.stopBroadcast();
         writeToFile(address(p));

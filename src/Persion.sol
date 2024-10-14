@@ -102,6 +102,17 @@ contract Persion {
         return bill.startTime + bill.payedMonths * month;
     }
 
+    function batchGetBills(
+        uint256 start,
+        uint256 end
+    ) external view returns (Bill[] memory _bills) {
+        _bills = new Bill[](end - start);
+        uint256 i;
+        for (; start < end; start++) {
+            _bills[i++] = bills[start];
+        }
+    }
+
     function _payOwner(uint256 _billIndex, uint256 amount) internal {
         Bill memory bill = bills[_billIndex];
         if (bill.payToken != address(0)) {
