@@ -6,7 +6,6 @@ import {IERC20} from "lib/openzeppelin-contracts/contracts/token/ERC20/IERC20.so
 contract Persion {
     mapping(uint256 => Bill) public bills;
     uint256 public billIndex;
-
     uint256 immutable month = 30 days;
 
     event NewBill(address creater, uint256 billIndex);
@@ -57,7 +56,7 @@ contract Persion {
         Bill memory bill = bills[_billIndex];
         require(bill.owner == msg.sender, "not owner");
         bills[_billIndex].closed = true;
-        _payOwner(_billIndex, bill.payMonths * bill.payAmount);
+        _payOwner(_billIndex, bill.payedMonths * bill.payAmount);
     }
 
     function payBill(
@@ -93,7 +92,7 @@ contract Persion {
         bills[_billIndex].receivedMonths += 1;
         _payOwner(
             _billIndex,
-            (bill.payMonths * bill.payAmount) / bill.receiveMonths
+            (bill.payedMonths * bill.payAmount) / bill.receiveMonths
         );
     }
 

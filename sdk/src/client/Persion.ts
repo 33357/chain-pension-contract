@@ -5,10 +5,8 @@ import { DeploymentInfo } from '../config';
 
 export class PersionClient {
   public contract: Persion;
-  protected _provider: Provider | Signer;
 
   constructor(provider: Provider | Signer, chainId: number) {
-    this._provider = provider;
     if (!DeploymentInfo[chainId].Persion) {
       throw 'no address';
     }
